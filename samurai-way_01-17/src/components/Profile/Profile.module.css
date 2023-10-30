@@ -1,0 +1,16 @@
+.content {
+    grid-area: c;
+    background-color: #e3d945;
+
+}
+
+.backgroundImg img {
+    width: 100%;
+}
+.item{
+    color: #5704f1;
+}
+.profileDescription img{
+    width: 80px;
+    border-radius: 50px;
+}
