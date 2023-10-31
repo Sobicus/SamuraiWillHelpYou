@@ -9,12 +9,12 @@ export const Post = (props: PostType) => {
                 alt=""/>
             {props.message}
             <div>
-                <span>like </span>{props.likeCounter}
+                <span>like </span>{props.likeCount}
             </div>
         </div>
     )
 }
 type PostType = {
     message: string
-    likeCounter: number
+    likeCount: number
 }

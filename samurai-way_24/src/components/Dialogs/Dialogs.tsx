@@ -12,33 +12,45 @@ const DialogItem = (props: DialogItemPropsType) => {
         </div>
     )
 }
-type DialogItemPropsType ={
-    name:string
-    id:number
+type DialogItemPropsType = {
+    id: number
+    name: string
 }
-const Message = (props:MessagePropsType)=>{
-    return(
+const Message = (props: MessagePropsType) => {
+    return (
         <div className={style.message}>{props.message}</div>
     )
 }
-type MessagePropsType={
-    message:string
+type MessagePropsType = {
+    id: number
+    message: string
 }
 export const Dialogs = () => {
+
+    let dialogsData = [
+        {id: 1, name: 'Viktoriia'},
+        {id: 2, name: 'Mark'},
+        {id: 3, name: 'Alina'},
+        {id: 4, name: 'Maks'},
+        {id: 5, name: 'Lubov'},
+        {id: 6, name: 'Anatoliy'},
+    ]
+    let messagesData=[
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is your going?'},
+        {id: 3, message: 'Good, and you?'},
+    ]
+
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
-                <DialogItem name={'Viktoriia'} id={1}/>
-                <DialogItem name={'Mark'} id={2}/>
-                <DialogItem name={'Alina'} id={3}/>
-                <DialogItem name={'Maks'} id={4}/>
-                <DialogItem name={'Lubov'} id={5}/>
-                <DialogItem name={'Anatoliy'} id={6}/>
+                <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
+                <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
             </div>
             <div className={style.messages}>
-                <Message message={'Hi'}/>
-                <Message message={'How is your going?'}/>
-                <Message message={'Good, and you?'}/>
+                <Message message={messagesData[0].message} id={messagesData[0].id}/>
+                <Message message={messagesData[1].message} id={messagesData[1].id}/>
+                <Message message={messagesData[2].message} id={messagesData[2].id}/>
             </div>
         </div>
     )
