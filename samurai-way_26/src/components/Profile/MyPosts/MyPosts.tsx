@@ -2,12 +2,7 @@ import React from "react";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
-export const MyPosts = () => {
-
-    let messagesData = [
-        {id: 1, message: 'Hi, how are you?', likeCount: 15},
-        {id: 2, message: 'It is my first post', likeCount: 20},
-    ]
+export const MyPosts = (props: MyPostsType) => {
 
     return (
         <div className={style.content}>
@@ -22,12 +17,18 @@ export const MyPosts = () => {
                     </div>
                 </div>
                 <div className={style.posts}>
-                    {messagesData.map((message) => <Post message={message.message} likeCount={message.likeCount}/>)}
-                    {/*<Post message={messagesData[0].message} likeCount={messagesData[0].likeCount}/>*/}
-                    {/*<Post message={messagesData[1].message} likeCount={messagesData[1].likeCount}/>*/}
+                    {props.myPostsMessagesData.map((myPostsMessagesData) => <Post message={myPostsMessagesData.message}
+                                                                                  likeCount={myPostsMessagesData.likeCount}/>)}
                 </div>
             </div>
         </div>
     )
 }
-
+type MyPostsType = {
+    myPostsMessagesData: myPostsMessagesDataType[]
+}
+export type myPostsMessagesDataType = {
+    id: number
+    message: string
+    likeCount: number
+}

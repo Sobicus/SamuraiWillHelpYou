@@ -1,14 +1,14 @@
 import React from "react";
 import style from './Profile.module.css'
-import {MyPosts} from "./MyPosts/MyPosts";
+import {MyPosts, myPostsMessagesDataType} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
-export const Profile = () => {
+export const Profile = (props: ProfileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts/>
+            <MyPosts myPostsMessagesData={props.myPostsMessagesData}/>
         </div>
     )
 }
-
+type ProfileType = { myPostsMessagesData: myPostsMessagesDataType[] }
