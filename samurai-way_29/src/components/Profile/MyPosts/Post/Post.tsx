@@ -1,7 +1,7 @@
 import React from "react";
 import style from './Post.module.css'
 
-export const Post = (props:PostType) => {
+export const Post = (props: PostType) => {
     return (
         <div className={style.item}>
             <img
@@ -9,12 +9,12 @@ export const Post = (props:PostType) => {
                 alt=""/>
             {props.message}
             <div>
-                <span>like </span>{props.likeCounter}
+                <span>like </span>{props.likeCount}
             </div>
         </div>
     )
 }
-type PostType={
-    message:string
-    likeCounter:number
+type PostType = {
+    message: string
+    likeCount: number
 }
