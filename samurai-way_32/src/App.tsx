@@ -19,7 +19,9 @@ export const App = (props: AppType) => {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile
-                        state={props.state.profilePage}/>}/>
+                        state={props.state.profilePage}
+                        addPost={props.addPost}
+                    />}/>
                     <Route /*exact*/ path='/dialogs'
                                      render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                     <Route path='/news' render={() => News}/>
@@ -32,4 +34,5 @@ export const App = (props: AppType) => {
 }
 type AppType = {
     state: StateType
+    addPost: (postMessage: string) => void
 }

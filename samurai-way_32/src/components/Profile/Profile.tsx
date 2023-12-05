@@ -7,10 +7,11 @@ export const Profile = (props: ProfileType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts myPostsMessagesData={props.state.myPostsMessagesData}/>
+            <MyPosts myPostsMessagesData={props.state.myPostsMessagesData} addPost={props.addPost}/>
         </div>
     )
 }
 type ProfileType = {
     state: ProfilePageType
+    addPost: (postMessage: string) => void
 }

@@ -21,6 +21,18 @@ export let state: StateType = {
         ],
     },
 }
+export const addPost = (postMessage: string) => {
+    const newPost: MyPostsMessagesDataType = {
+        id: 3,
+        message: postMessage,
+        likeCount: 7,
+    }
+    // return {
+    //     ...state,
+    //     profilePage: {...state.profilePage, myPostsMessagesData: [...state.profilePage.myPostsMessagesData, newPost]}
+    // }
+    state.profilePage.myPostsMessagesData.push(newPost)
+}
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType

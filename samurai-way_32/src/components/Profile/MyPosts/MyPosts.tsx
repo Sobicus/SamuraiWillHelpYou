@@ -5,10 +5,10 @@ import {Post} from "./Post/Post";
 
 export const MyPosts = (props: MyPostsType) => {
     const {myPostsMessagesData} = props
-    let newPostElement=React.createRef<HTMLTextAreaElement>()
-    const addPost = ()=>{
-        let text = newPostElement.current?.value
-        alert(text)
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    const addPost = () => {
+        let text = newPostElement.current!.value
+        props.addPost(text)
     }
     return (
         <div className={style.content}>
@@ -32,4 +32,5 @@ export const MyPosts = (props: MyPostsType) => {
 }
 type MyPostsType = {
     myPostsMessagesData: MyPostsMessagesDataType[]
+    addPost: (postMessage: string) => void
 }
