@@ -1,5 +1,5 @@
 import React from "react";
-import {MyPostsMessagesDataType} from "../../..";
+import { MyPostsMessagesDataType } from "../../../redux/state";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
