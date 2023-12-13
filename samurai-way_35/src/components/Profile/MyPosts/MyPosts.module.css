@@ -1,0 +1,12 @@
+.content {
+    /*grid-area: c;*/
+    background-color: #e3d945;
+    padding: 10px;
+}
+
+.backgroundImg img {
+    width: 100%;
+}
+.posts{
+    margin-top: 20px;
+}
