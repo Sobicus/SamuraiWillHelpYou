@@ -49,7 +49,7 @@ export let store: StoreType = {
         this._callSubscriber(this._state)
     },*/
     dispatch(action: any) {
-        if (action.type = 'ADD-POST') {
+        if (action.type === 'ADD-POST') {
             const newPost: MyPostsMessagesDataType = {
                 id: 3,
                 message: this._state.profilePage.newPostText,
@@ -58,7 +58,7 @@ export let store: StoreType = {
             this._state.profilePage.myPostsMessagesData.push(newPost)
             this._state.profilePage.newPostText = ''
             this._callSubscriber(this._state)
-        } else if (action.type = 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
         }

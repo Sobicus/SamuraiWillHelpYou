@@ -1,15 +1,16 @@
 import React from "react";
-import {MyPostsMessagesDataType} from "../../../redux/state";
+import {addPostActionCreator, MyPostsMessagesDataType, updateNewPostTextActionCreator} from "../../../redux/state";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
+
 
 export const MyPosts = (props: MyPostsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const addPost = () => {
-        props.dispatch({type: 'ADD-POST'})
+        props.dispatch(addPostActionCreator())
     }
     const onPostChange = () => {
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current!.value})
+        props.dispatch(updateNewPostTextActionCreator(newPostElement.current!.value))
     }
     return (
         <div className={style.content}>
