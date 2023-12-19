@@ -10,13 +10,12 @@ export const Profile = (props: ProfileType) => {
             <MyPosts
                 myPostsMessagesData={props.profilePage.myPostsMessagesData}
                 newPostText={props.profilePage.newPostText}
-                addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}/>
+                dispatch={props.dispatch}/>
         </div>
     )
 }
 type ProfileType = {
     profilePage: ProfilePageType
-    addPost: () => void
-    updateNewPostText:(newText:string)=>void
+    dispatch: (action: any) => void
+
 }

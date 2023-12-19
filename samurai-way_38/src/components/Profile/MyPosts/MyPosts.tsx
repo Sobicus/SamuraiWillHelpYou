@@ -6,10 +6,10 @@ import {Post} from "./Post/Post";
 export const MyPosts = (props: MyPostsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
     const addPost = () => {
-        props.addPost()
+        props.dispatch({type: 'ADD-POST'})
     }
-    const onPostChange=()=>{
-        props.updateNewPostText(newPostElement.current!.value)
+    const onPostChange = () => {
+        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current!.value})
     }
     return (
         <div className={style.content}>
@@ -37,6 +37,5 @@ export const MyPosts = (props: MyPostsType) => {
 type MyPostsType = {
     myPostsMessagesData: MyPostsMessagesDataType[]
     newPostText: string
-    addPost: () => void
-    updateNewPostText:(newText:string)=>void
+    dispatch: (action: any) => void
 }

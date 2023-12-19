@@ -19,8 +19,7 @@ export const App = (props: AppType) => {
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile
                         profilePage={props.state.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}
+                        dispatch={props.dispatch}
                     />}/>
                     <Route /*exact*/ path='/dialogs'
                                      render={() => <Dialogs state={props.state.dialogsPage}/>}/>
@@ -33,6 +32,6 @@ export const App = (props: AppType) => {
 }
 type AppType = {
     state: StateType
-    addPost: () => void
-    updateNewPostText:(newText:string)=>void
+    dispatch: (action: any) => void
+
 }
