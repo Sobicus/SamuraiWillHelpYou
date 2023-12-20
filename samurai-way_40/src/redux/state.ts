@@ -1,5 +1,7 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_POST = 'ADD-POST'
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
 
 
 export let store: StoreType = {
@@ -25,6 +27,7 @@ export let store: StoreType = {
                 {id: 2, message: 'How is your going?'},
                 {id: 3, message: 'Good, and you?'},
             ],
+            newMessageBody: '',
         },
     },
     _callSubscriber(state: StateType) {
@@ -37,23 +40,8 @@ export let store: StoreType = {
     subscribe(observer: any) {
         this._callSubscriber = observer
     },
-
-   /* addPost() {
-        const newPost: MyPostsMessagesDataType = {
-            id: 3,
-            message: this._state.profilePage.newPostText,
-            likeCount: 7,
-        }
-        this._state.profilePage.myPostsMessagesData.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },*/
     dispatch(action: any) {
-        if (action.type ==='ADD-POST') {
+        if (action.type === 'ADD-POST') {
             const newPost: MyPostsMessagesDataType = {
                 id: 3,
                 message: this._state.profilePage.newPostText,
@@ -65,6 +53,14 @@ export let store: StoreType = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+            this._state.dialogsPage.newMessageBody = action.newMessageText
+            this._callSubscriber(this._state)
+        } else if (action.type === 'SEND-MESSAGE') {
+            const body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.messagesData.push({id: 4, message: body})
+            this._callSubscriber(this._state)
         }
     }
 }
@@ -74,12 +70,20 @@ export const addPostActionCreator = () => {
 export const updateNewPostTextActionCreator = (text: string) => {
     return {type: UPDATE_NEW_POST_TEXT, newText: text}
 }
-type StoreType = {
+export const sendMessageActionCreator = () => {
+    return {type: SEND_MESSAGE}
+}
+export const updateNewMessageBodyActionCreator = (text: string) => {
+    return {type: UPDATE_NEW_MESSAGE_BODY, newMessageText: text}
+}
+
+
+export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
-   /* addPost: () => void
-    updateNewPostText: (newText: string) => void*/
+    /* addPost: () => void
+     updateNewPostText: (newText: string) => void*/
     subscribe: (observer: any) => void
     dispatch: (action: any) => void
 }
@@ -94,6 +98,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
+    newMessageBody: string
 }
 export type DialogsDataType = {
     id: number

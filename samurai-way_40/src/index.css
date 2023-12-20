@@ -12,4 +12,8 @@ code {
     monospace;
 }*/
 
-
+html{
+    background: linear-gradient(66deg, #e38010, #1535bf);
+    width: 100%;
+    height: 100%;
+}

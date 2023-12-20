@@ -8,7 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from './components/Settings/Settings';
-import {StateType} from './redux/state';
+import {StateType, StoreType} from './redux/state';
 
 
 export const App = (props: AppType) => {
@@ -22,7 +22,7 @@ export const App = (props: AppType) => {
                         dispatch={props.dispatch}
                     />}/>
                     <Route /*exact*/ path='/dialogs'
-                                     render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                                     render={() => <Dialogs store={props.store}/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
@@ -33,5 +33,5 @@ export const App = (props: AppType) => {
 type AppType = {
     state: StateType
     dispatch: (action: any) => void
-
+    store:StoreType
 }
