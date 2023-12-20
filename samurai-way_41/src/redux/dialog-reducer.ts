@@ -1,11 +1,12 @@
 import {
+    ActionsType,
     DialogsPageType,
 } from "./state";
 
 export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 export const SEND_MESSAGE = 'SEND-MESSAGE'
 
-export const dialogReducer = (state: DialogsPageType, action: ActionsDialogsType) => {
+export const dialogReducer = (state: DialogsPageType, action: ActionsType) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {
             state.newMessageBody = action.newMessageText
@@ -21,12 +22,18 @@ export const dialogReducer = (state: DialogsPageType, action: ActionsDialogsType
             return state
     }
 }
-export const sendMessageActionCreator = () => {
-    return {type: SEND_MESSAGE} as const
+export const sendMessageActionCreator = ():SendMessageActionCreatorType => {
+    return {type: SEND_MESSAGE}
 }
-export const updateNewMessageBodyActionCreator = (newMessageText: string) => {
-    return {type: UPDATE_NEW_MESSAGE_BODY, newMessageText} as const
+export const updateNewMessageBodyActionCreator = (newMessageText: string):UpdateNewMessageBodyActionCreatorType => {
+    return {type: UPDATE_NEW_MESSAGE_BODY, newMessageText}
 }
-export type ActionsDialogsType = sendMessageActionCreatorType | updateNewMessageBodyActionCreatorType
-type sendMessageActionCreatorType = ReturnType<typeof sendMessageActionCreator>
-type updateNewMessageBodyActionCreatorType = ReturnType<typeof updateNewMessageBodyActionCreator>
+//export type ActionsDialogsType = SendMessageActionCreatorType | UpdateNewMessageBodyActionCreatorType
+// type sendMessageActionCreatorType = ReturnType<typeof sendMessageActionCreator>
+// type updateNewMessageBodyActionCreatorType = ReturnType<typeof updateNewMessageBodyActionCreator>
+export type SendMessageActionCreatorType = {
+    type: 'SEND-MESSAGE'
+}
+export type UpdateNewMessageBodyActionCreatorType = {
+    type: 'UPDATE-NEW-MESSAGE-BODY', newMessageText: string
+}

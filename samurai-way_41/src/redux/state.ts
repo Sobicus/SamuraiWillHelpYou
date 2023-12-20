@@ -1,5 +1,5 @@
-import {ActionProfileType, ADD_POST, profileReducer, UPDATE_NEW_POST_TEXT} from "./profile-reducer";
-import {ActionsDialogsType, dialogReducer, SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "./dialog-reducer";
+import { AddPostActionCreatorType, profileReducer, UpdateNewPostTextActionCreatorType} from "./profile-reducer";
+import { dialogReducer, SendMessageActionCreatorType, UpdateNewMessageBodyActionCreatorType} from "./dialog-reducer";
 
 export let store: StoreType = {
     _state: {
@@ -27,35 +27,32 @@ export let store: StoreType = {
             newMessageBody: '',
         },
     },
-    _callSubscriber(state: StateType) {
+    _callSubscriber(state) {
         console.log('State changed')
     },
 
     getState() {
         return this._state
     },
-    subscribe(observer: any) {
+    subscribe(observer) {
         this._callSubscriber = observer
     },
-    dispatch(action: any) {
+    dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action)
         this._callSubscriber(this._state)
     }
 }
-type ActionsType =
-    ActionsDialogsType
-    | ActionProfileType
+export type ActionsType =
+    AddPostActionCreatorType | UpdateNewPostTextActionCreatorType |SendMessageActionCreatorType | UpdateNewMessageBodyActionCreatorType
 
 
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
-    /* addPost: () => void
-     updateNewPostText: (newText: string) => void*/
-    subscribe: (observer: any) => void
-    dispatch: (action: any) => void
+    subscribe: (observer: ()=>void) => void
+    dispatch: (action: ActionsType) => void
 }
 export type StateType = {
     profilePage: ProfilePageType

@@ -12,13 +12,14 @@ import {StateType, StoreType} from './redux/state';
 
 
 export const App = (props: AppType) => {
+    const state = props.store.getState()
     return (
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/profile' render={() => <Profile
-                        profilePage={props.state.profilePage}
+                        profilePage={state.profilePage}
                         dispatch={props.dispatch}
                     />}/>
                     <Route /*exact*/ path='/dialogs'
@@ -31,7 +32,6 @@ export const App = (props: AppType) => {
     );
 }
 type AppType = {
-    state: StateType
     dispatch: (action: any) => void
     store:StoreType
 }
