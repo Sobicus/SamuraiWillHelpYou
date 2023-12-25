@@ -1,14 +1,20 @@
 import {
     ActionsType,
-    MyPostsMessagesDataType,
     ProfilePageType,
-} from "./state";
+} from "./store";
 
 export const ADD_POST = 'ADD-POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
+let initialState:ProfilePageType = {
+    myPostsMessagesData: [
+        {id: 1, message: 'Hi, how are you?', likeCount: 15},
+        {id: 2, message: 'It is my first post', likeCount: 20},
+    ],
+    newPostText: 'FILL ME',
+}
 
-export const profileReducer = (state: ProfilePageType, action: ActionsType) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case ADD_POST: {
             const newPost = {
@@ -28,10 +34,10 @@ export const profileReducer = (state: ProfilePageType, action: ActionsType) => {
             return state
     }
 }
-export const addPostActionCreator = ():AddPostActionCreatorType => {
+export const addPostActionCreator = (): AddPostActionCreatorType => {
     return {type: ADD_POST}
 }
-export const updateNewPostTextActionCreator = (text: string):UpdateNewPostTextActionCreatorType => {
+export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextActionCreatorType => {
     return {type: UPDATE_NEW_POST_TEXT, newText: text}
 }
 //export type ActionProfileType = AddPostActionCreatorType | UpdateNewPostTextActionCreatorType

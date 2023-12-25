@@ -2,10 +2,10 @@ import './index.css';
 import ReactDOM from "react-dom";
 import {App} from "./App";
 import React from "react";
-import {StateType, store} from './redux/state';
 import {BrowserRouter} from 'react-router-dom';
+import {AppStateType, store} from './redux/redux-store';
 
-let rerenderEntireTree = (/*state: StateType*/) => {
+let rerenderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <App
@@ -17,6 +17,9 @@ let rerenderEntireTree = (/*state: StateType*/) => {
     )
 }
 
-rerenderEntireTree(/*store.getState()*/)
-store.subscribe(rerenderEntireTree)
+rerenderEntireTree()
+store.subscribe(()=>{
+    let state = store.getState()//wtf doesn't work
+    rerenderEntireTree()
+})
 

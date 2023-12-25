@@ -3,7 +3,7 @@ import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {
     StoreType
-} from "../../redux/state";
+} from "../../redux/store";
 import {ChangeEvent} from 'react';
 import {sendMessageActionCreator, updateNewMessageBodyActionCreator } from '../../redux/dialog-reducer';
 
