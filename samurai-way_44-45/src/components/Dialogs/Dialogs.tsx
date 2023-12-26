@@ -2,11 +2,9 @@ import style from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {Message} from "./Message/Message";
 import {
-    DialogsPageType,
-    StoreType
+    DialogsPageType
 } from "../../redux/store";
 import {ChangeEvent} from 'react';
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../../redux/dialog-reducer';
 
 export const Dialogs = (props: DialogsType) => {
     let state = props.dialogsPage
