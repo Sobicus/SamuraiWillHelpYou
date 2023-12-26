@@ -1,17 +1,17 @@
 import React from "react";
-import { addPostActionCreator, updateNewPostTextActionCreator } from "../../../redux/profile-reducer";
-import { MyPostsMessagesDataType} from "../../../redux/store";
+import {MyPostsMessagesDataType} from "../../../redux/store";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 
 
 export const MyPosts = (props: MyPostsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const addPost = () => {
-        props.dispatch(addPostActionCreator())
+    const onAddPost = () => {
+        props.addPost()
     }
     const onPostChange = () => {
-        props.dispatch(updateNewPostTextActionCreator(newPostElement.current!.value))
+        let text = newPostElement.current!.value
+        props.updateNewPostText(text)
     }
     return (
         <div className={style.content}>
@@ -25,7 +25,7 @@ export const MyPosts = (props: MyPostsType) => {
                             onChange={onPostChange}/>
                     </div>
                     <div>
-                        <button onClick={addPost}>Add post</button>
+                        <button onClick={onAddPost}>Add post</button>
                     </div>
                 </div>
                 <div className={style.posts}>
@@ -39,5 +39,6 @@ export const MyPosts = (props: MyPostsType) => {
 type MyPostsType = {
     myPostsMessagesData: MyPostsMessagesDataType[]
     newPostText: string
-    dispatch: (action: any) => void
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
