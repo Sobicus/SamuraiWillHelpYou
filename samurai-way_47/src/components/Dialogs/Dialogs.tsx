@@ -12,13 +12,13 @@ export const Dialogs = (props: DialogsType) => {
     let messagesElements = state.messagesData.map((message) => <Message message={message.message}
                                                                         id={message.id}/>)
     let onSendMessageClick = () => {
-        props.sendMessage()
+        props.sendMessageActionCreator()
     }
     let newMessageBody = state.newMessageBody
     let onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let newMessageBody = e.target.value
         //props.store.dispatch(updateNewMessageBodyActionCreator(newMessageBody))
-        props.updateNewMessageBody(newMessageBody)
+        props.updateNewMessageBodyActionCreator(newMessageBody)
     }
     return (
         <div className={style.dialogs}>
@@ -44,7 +44,7 @@ export const Dialogs = (props: DialogsType) => {
 }
 type DialogsType = {
     /*store: StoreType*/
-    updateNewMessageBody: (newMessageBody: string) => void
-    sendMessage: () => void
+    updateNewMessageBodyActionCreator: (newMessageBody: string) => void
+    sendMessageActionCreator: () => void
     dialogsPage: DialogsPageType
 }

@@ -26,14 +26,16 @@ let initialState: DialogsPageType = {
 export const dialogReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY: {
-            state.newMessageBody = action.newMessageText
-            return state
+            // state.newMessageBody = action.newMessageText
+            // return state
+            return {...state, newMessageBody: action.newMessageText}
         }
         case SEND_MESSAGE: {
-            const body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messagesData.push({id: 4, message: body})
-            return state
+            // const body = state.newMessageBody
+            // state.newMessageBody = ''
+            // state.messagesData.push({id: 4, message: body})
+            // return state
+            return {...state, messagesData: [...state.messagesData, {id: 4, message: state.newMessageBody}], newMessageBody: ''}
         }
         default:
             return state
