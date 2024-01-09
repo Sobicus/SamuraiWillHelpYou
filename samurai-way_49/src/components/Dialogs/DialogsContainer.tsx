@@ -3,9 +3,10 @@ import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from '../..
 import {Dialogs} from "./Dialogs";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
 
 
-let mapStateToProps= (state: StateType) => {
+let mapStateToProps= (state: AppStateType) => {
     return{
         dialogsPage:state.dialogsPage
     }

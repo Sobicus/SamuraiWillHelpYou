@@ -30,12 +30,12 @@ let initialState: UsersStateType = {
     ]
 }
 
-export const usersReducer = (state: UsersStateType = initialState, action: ActionType) => {
+export const usersReducer = (state: UsersStateType = initialState, action: ActionType):UsersStateType => {
     switch (action.type) {
         case FOLLOW:
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, status: true} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)}
         case UNFOLLOW:
-            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, status: false} : u)}
+            return {...state, users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)}
         case SET_USERS:
             return {...state, users: [...state.users, ...action.users]}
         default:

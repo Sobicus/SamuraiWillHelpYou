@@ -35,7 +35,7 @@ export const Users = (props: UsersType) => {
     return (
         <div>
             {props.users.map(u => {
-                <div key={u.id}>
+                return <div key={u.id}>
                     <span>
                         <div>
                             <img src={u.photoUrl} className={style.userPhoto}/>
@@ -50,7 +50,7 @@ export const Users = (props: UsersType) => {
                     </span>
                     <span>
                         <span>
-                            <div>{u.fullname}</div>
+                            <div>{u.fullName}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
