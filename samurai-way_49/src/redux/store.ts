@@ -1,7 +1,8 @@
 import { AddPostActionCreatorType, profileReducer, UpdateNewPostTextActionCreatorType} from "./profile-reducer";
 import { dialogReducer, SendMessageActionCreatorType, UpdateNewMessageBodyActionCreatorType} from "./dialog-reducer";
+import {UserType} from "./users-reducer";
 
-export let store: StoreType = {
+/*export let store: StoreType = {
     _state: {
         profilePage: {
             myPostsMessagesData: [
@@ -42,7 +43,7 @@ export let store: StoreType = {
         this._state.dialogsPage = dialogReducer(this._state.dialogsPage, action)
         this._callSubscriber(this._state)
     }
-}
+}*/
 export type ActionsType =
     AddPostActionCreatorType | UpdateNewPostTextActionCreatorType |SendMessageActionCreatorType | UpdateNewMessageBodyActionCreatorType
 
