@@ -4,47 +4,23 @@ import axios from "axios";
 import userPhotoTemplate from '../../assets/img/avatar.jpg'
 
 export const Users = (props: UsersType) => {
-    if (props.users.length === 0) {
+    let getUsers = () => {
+        if (props.users.length === 0) {
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response=>props.setUsers(response.data.items))
-
-        // props.setUsers([
-        //         {
-        //             id: 1,
-        //             photoUrl: 'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg',
-        //             followed: true,
-        //             fullName: 'Maks',
-        //             status: 'I am a boss',
-        //             location: {city: 'Kyiv', country: 'Ukraine'}
-        //         },
-        //         {
-        //             id: 2,
-        //             photoUrl: 'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg',
-        //             followed: true,
-        //             fullName: 'Viktoriia',
-        //             status: 'I am a boss',
-        //             location: {city: 'Odessa', country: 'Ukraine'}
-        //         },
-        //         {
-        //             id: 3,
-        //             photoUrl: 'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg',
-        //             followed: false,
-        //             fullName: 'Mark',
-        //             status: 'I am a boss',
-        //             location: {city: 'Dnipro', country: 'Ukraine'}
-        //         },
-        //     ]
-        // )
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => props.setUsers(response.data.items))
+        }
     }
 
     return (
         <div>
+            <button onClick={getUsers}>GET USERS</button>
             {props.users.map(u => {
                 return <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos.small !=null ? u.photos.small: userPhotoTemplate} className={style.userPhoto}/>
+                            <img src={u.photos.small != null ? u.photos.small : userPhotoTemplate}
+                                 className={style.userPhoto}/>
                         </div>
                         <div>
                             {u.followed ? <button onClick={() => {
