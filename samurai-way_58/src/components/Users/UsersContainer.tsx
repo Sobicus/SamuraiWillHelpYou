@@ -79,6 +79,7 @@ let mapStateToProps = (state: AppStateType) => {
         isFetching: state.usersPage.isFetching
     }
 }
+/*
 let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         follow: (userId: number) => {
@@ -101,5 +102,13 @@ let mapDispatchToProps = (dispatch: Dispatch) => {
         }
     }
 }
+*/
 /*export const UsersContainer =*/
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    follow: followAC,
+    unfollow: unfollowAC,
+    setUsers: setUsersAC,
+    setCurrentPage: setCurrentPageAC,
+    setTotalUsersCount: setUsersTotalCountAC,
+    toggleIsFetching: toggleIsFetchingAC
+})(UsersContainer)
