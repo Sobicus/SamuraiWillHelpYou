@@ -3,12 +3,14 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState: UsersStateType = {
     users: [],
-    pageSize: 5,
+    pageSize: 10,
     totalCount: 50,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: true
 }
 
 export const usersReducer = (state: UsersStateType = initialState, action: ActionType): UsersStateType => {
@@ -27,6 +29,9 @@ export const usersReducer = (state: UsersStateType = initialState, action: Actio
         }
         case SET_TOTAL_USERS_COUNT: {
             return {...state, totalCount: action.totalUsersCount}
+        }
+        case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
         }
         default:
             return state
@@ -48,18 +53,29 @@ export const setCurrentPageAC = (currentPage: number) => {
 export const setUsersTotalCountAC = (totalUsersCount: number) => {
     return {type: SET_TOTAL_USERS_COUNT, totalUsersCount} as const
 }
-type ActionType = followACType | unfollowACType | setUsersACType | setCurrentPageACType | setUsersTotalCountACType
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {type: TOGGLE_IS_FETCHING, isFetching} as const
+}
+
+type ActionType = followACType
+    | unfollowACType
+    | setUsersACType
+    | setCurrentPageACType
+    | setUsersTotalCountACType
+    | toggleIsFetchingACType
 type followACType = ReturnType<typeof followAC>
 type unfollowACType = ReturnType<typeof unfollowAC>
 type setUsersACType = ReturnType<typeof setUsersAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
+type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
 
 type UsersStateType = {
     users: Array<UserType>
     pageSize: number
     totalCount: number
     currentPage: number
+    isFetching: boolean
 }
 export type UserType = {
     id: number
