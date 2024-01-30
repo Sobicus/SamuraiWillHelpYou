@@ -32,7 +32,8 @@ export const Users = (props: UsersType) => {
                             </NavLink>
                         </div>
                         <div>
-                            {u.followed ? <button onClick={() => {
+                            {u.followed ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                                props.toggleIsFollowingProgress(true, u.id)
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                     withCredentials: true, headers: {
                                         'API-KEY': '978ec9e4-88e0-4331-b5bc-a8ba69be02cb'
@@ -42,8 +43,10 @@ export const Users = (props: UsersType) => {
                                         if (response.data.resultCode === 0) {
                                             props.unfollow(u.id)
                                         }
+                                        props.toggleIsFollowingProgress(false, u.id)
                                     })
-                            }}>Unfollow</button> : <button onClick={() => {
+                            }}>Unfollow</button> : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                                props.toggleIsFollowingProgress(true, u.id)
                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                     withCredentials: true, headers: {
                                         'API-KEY': '978ec9e4-88e0-4331-b5bc-a8ba69be02cb'
@@ -53,6 +56,7 @@ export const Users = (props: UsersType) => {
                                         if (response.data.resultCode === 0) {
                                             props.follow(u.id)
                                         }
+                                        props.toggleIsFollowingProgress(false, u.id)
                                     })
                             }}>Follow</button>}
                         </div>
@@ -80,4 +84,6 @@ type UsersType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
+    toggleIsFollowingProgress: (isFetching: boolean, userId:number) => void
+    followingInProgress: number[]
 }

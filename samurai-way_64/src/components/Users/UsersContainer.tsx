@@ -3,7 +3,7 @@ import {
     followAC,
     setCurrentPageAC,
     setUsersAC,
-    setUsersTotalCountAC, toggleIsFetchingAC,
+    setUsersTotalCountAC, toggleIsFetchingAC, toggleIsFollowingProgressAC,
     unfollowAC,
     UserType
 } from "../../redux/users-reducer";
@@ -11,7 +11,7 @@ import {connect} from "react-redux";
 import React from "react";
 import {Users} from "./Users";
 import {Preloader} from "../common/preloader/Preloader";
-import { usersAPI } from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component<UsersContainerType> {
     componentDidMount() {
@@ -51,7 +51,9 @@ class UsersContainer extends React.Component<UsersContainerType> {
                     currentPage={this.props.currentPage}
                     follow={this.props.follow}
                     unfollow={this.props.unfollow}
-                    onPageChanged={this.onPageChanged}/>
+                    onPageChanged={this.onPageChanged}
+                    toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
+                    followingInProgress={this.props.followingInProgress}/>
             </>
         )
     }
@@ -69,6 +71,8 @@ type UsersContainerType = {
     setTotalUsersCount: (totalUsersCount: number) => void
     isFetching: boolean
     toggleIsFetching: (isFetching: boolean) => void
+    toggleIsFollowingProgress: (isFetching: boolean, userId:number) => void
+    followingInProgress:number[]
 }
 let mapStateToProps = (state: AppStateType) => {
     return {
@@ -76,7 +80,8 @@ let mapStateToProps = (state: AppStateType) => {
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress:state.usersPage.followingInProgress
     }
 }
 
@@ -86,5 +91,6 @@ export default connect(mapStateToProps, {
     setUsers: setUsersAC,
     setCurrentPage: setCurrentPageAC,
     setTotalUsersCount: setUsersTotalCountAC,
-    toggleIsFetching: toggleIsFetchingAC
+    toggleIsFetching: toggleIsFetchingAC,
+    toggleIsFollowingProgress: toggleIsFollowingProgressAC
 })(UsersContainer)

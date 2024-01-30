@@ -4,13 +4,15 @@ const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 let initialState: UsersStateType = {
     users: [],
     pageSize: 10,
     totalCount: 50,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingInProgress: []
 }
 
 export const usersReducer = (state: UsersStateType = initialState, action: ActionType): UsersStateType => {
@@ -32,6 +34,13 @@ export const usersReducer = (state: UsersStateType = initialState, action: Actio
         }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}
+        }
+        case TOGGLE_IS_FOLLOWING_PROGRESS: {
+            return {
+                ...state, followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
         }
         default:
             return state
@@ -56,6 +65,9 @@ export const setUsersTotalCountAC = (totalUsersCount: number) => {
 export const toggleIsFetchingAC = (isFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching} as const
 }
+export const toggleIsFollowingProgressAC = (isFetching: boolean, userId:number) => {
+    return {type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId} as const
+}
 
 type ActionType = followACType
     | unfollowACType
@@ -63,12 +75,14 @@ type ActionType = followACType
     | setCurrentPageACType
     | setUsersTotalCountACType
     | toggleIsFetchingACType
+    | toggleIsFollowingProgressACType
 type followACType = ReturnType<typeof followAC>
 type unfollowACType = ReturnType<typeof unfollowAC>
 type setUsersACType = ReturnType<typeof setUsersAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type setUsersTotalCountACType = ReturnType<typeof setUsersTotalCountAC>
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+type toggleIsFollowingProgressACType = ReturnType<typeof toggleIsFollowingProgressAC>
 
 type UsersStateType = {
     users: Array<UserType>
@@ -76,6 +90,7 @@ type UsersStateType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 export type UserType = {
     id: number
