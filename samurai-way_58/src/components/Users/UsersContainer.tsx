@@ -79,8 +79,8 @@ let mapStateToProps = (state: AppStateType) => {
         isFetching: state.usersPage.isFetching
     }
 }
-/*
-let mapDispatchToProps = (dispatch: Dispatch) => {
+
+/*let mapDispatchToProps = (dispatch: Dispatch) => {
     return {
         follow: (userId: number) => {
             dispatch(followAC(userId))
