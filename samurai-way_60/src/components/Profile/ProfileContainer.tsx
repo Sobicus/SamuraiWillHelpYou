@@ -38,8 +38,7 @@ type OwnPropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile
 })
-//let WithUrlDataContainerComponent= withRouter(ProfileContainer)
-//export default withRouter(connect(mapStateToProps,{setUserProfile:setUserProfileAC})(ProfileContainer))
+
 export default compose<React.ComponentType>(connect(mapStateToProps, {setUserProfile: setUserProfileAC}), withRouter)(ProfileContainer)
 
 
