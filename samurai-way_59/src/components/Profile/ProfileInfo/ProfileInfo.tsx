@@ -1,18 +1,38 @@
 import React from "react";
 import style from './ProfileInfo.module.css'
-export const ProfileInfo = () => {
+import avatar from '../../../assets/img/avatar.jpg'
+import profileBackground from '../../../assets/img/profileBackground.png'
+import {ProfileType} from "../../../redux/store";
+export const ProfileInfo = (props:ProfileInfoType) => {
     return (
             <div>
                 <div className={style.backgroundImg}>
-                    <img src="https://images3.alphacoders.com/132/1328863.png" alt="conten picture"/>
+                    <img src={profileBackground} alt="conten picture"/>
                 </div>
                 <div className={style.profileDescription}>
                     <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAkwUuH1nLTA_3tYTUKCYbJIjYDbm_FltuSA&usqp=CAU"
-                        alt=""/>
+                        src={props.profile.photos.large}
+                        alt="avatar"/>
                     ava + description
+                    
+                    <div>
+                        <span>aboutMe: {props.profile.aboutMe}</span><br/>
+                        <span>facebook: {props.profile.contacts.facebook}</span><br/>
+                        <span>website: {props.profile.contacts.website}</span><br/>
+                        <span>vk: {props.profile.contacts.vk}</span><br/>
+                        <span>twitter: {props.profile.contacts.twitter}</span><br/>
+                        <span>instagram: {props.profile.contacts.instagram}</span><br/>
+                        <span>youtube: {props.profile.contacts.youtube}</span><br/>
+                        <span>github: {props.profile.contacts.github}</span><br/>
+                        <span>mainLink: {props.profile.contacts.mainLink}</span><br/>
+                        <span>lookingForAJob: {props.profile.lookingForAJob}</span><br/>
+                        <span>lookingForAJobDescription: {props.profile.lookingForAJobDescription}</span><br/>
+                        <span>fullName: {props.profile.fullName}</span><br/>
+                    </div>
                 </div>
             </div>
     )
 }
-
+type ProfileInfoType = {
+    profile: ProfileType
+}

@@ -1,6 +1,4 @@
-import { AddPostActionCreatorType, profileReducer, UpdateNewPostTextActionCreatorType} from "./profile-reducer";
-import { dialogReducer, SendMessageActionCreatorType, UpdateNewMessageBodyActionCreatorType} from "./dialog-reducer";
-import {UserType} from "./users-reducer";
+import {SendMessageActionCreatorType, UpdateNewMessageBodyActionCreatorType} from "./dialog-reducer";
 
 /*export let store: StoreType = {
     _state: {
@@ -45,14 +43,15 @@ import {UserType} from "./users-reducer";
     }
 }*/
 export type ActionsType =
-    AddPostActionCreatorType | UpdateNewPostTextActionCreatorType |SendMessageActionCreatorType | UpdateNewMessageBodyActionCreatorType
+    | SendMessageActionCreatorType
+    | UpdateNewMessageBodyActionCreatorType
 
 
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
-    subscribe: (observer: ()=>void) => void
+    subscribe: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
 export type StateType = {
@@ -61,6 +60,7 @@ export type StateType = {
 }
 export type ProfilePageType = {
     myPostsMessagesData: Array<MyPostsMessagesDataType>
+    profile: ProfileType
     newPostText: string
 }
 export type DialogsPageType = {
@@ -80,4 +80,27 @@ export type MyPostsMessagesDataType = {
     id: number
     message: string
     likeCount: number
+}
+export type ProfileType = {
+    aboutMe: string
+    contacts: profileContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: usersPhotosStateType
+}
+export type profileContactsType = {
+    facebook: string
+    website: string
+    vk: string
+    twitter: string
+    instagram: string
+    youtube: string
+    github: string
+    mainLink: string
+}
+export type usersPhotosStateType = {
+    small: string
+    large: string
 }

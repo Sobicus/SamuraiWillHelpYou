@@ -2,8 +2,9 @@ import {UserType} from "../../redux/users-reducer";
 import style from "./Users.module.css";
 import userPhotoTemplate from "../../assets/img/avatar.jpg";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
-export const Users = (props:UsersType) => {
+export const Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -24,8 +25,10 @@ export const Users = (props:UsersType) => {
                 return <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photos.small != null ? u.photos.small : userPhotoTemplate}
-                                 className={style.userPhoto}/>
+                            <NavLink to={'/profile/' + u.id}>
+                                <img alt='avatar' src={u.photos.small != null ? u.photos.small : userPhotoTemplate}
+                                     className={style.userPhoto}/>
+                            </NavLink>
                         </div>
                         <div>
                             {u.followed ? <button onClick={() => {
@@ -57,5 +60,5 @@ type UsersType = {
     currentPage: number
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    onPageChanged:(pageNumber: number)=>void
+    onPageChanged: (pageNumber: number) => void
 }

@@ -1,5 +1,4 @@
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     followAC,
     setCurrentPageAC,
