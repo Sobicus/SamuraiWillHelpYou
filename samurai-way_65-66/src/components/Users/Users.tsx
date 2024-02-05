@@ -1,9 +1,10 @@
-import {UserType} from "../../redux/users-reducer";
+import {followTC, unFollowTC, UserType} from "../../redux/users-reducer";
 import style from "./Users.module.css";
 import userPhotoTemplate from "../../assets/img/avatar.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 export const Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
@@ -34,33 +35,25 @@ export const Users = (props: UsersType) => {
                         <div>
                             {u.followed ? <button disabled={props.followingInProgress.some(id => id === u.id)}
                                                   onClick={() => {
-                                                      props.toggleIsFollowingProgress(true, u.id)
-                                                      axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                                          withCredentials: true, headers: {
-                                                              'API-KEY': '978ec9e4-88e0-4331-b5bc-a8ba69be02cb'
+                                                      props.unFollowTC(u.id)
+                                                      /*props.toggleIsFollowingProgress(true, u.id)
+                                                      usersAPI.unfollow(u.id).then(response => {
+                                                          if (response.data.resultCode === 0) {
+                                                              props.unfollow(u.id)
                                                           }
-                                                      })
-                                                          .then(response => {
-                                                              if (response.data.resultCode === 0) {
-                                                                  props.unfollow(u.id)
-                                                              }
-                                                              props.toggleIsFollowingProgress(false, u.id)
-                                                          })
+                                                          props.toggleIsFollowingProgress(false, u.id)
+                                                      })*/
                                                   }}>Unfollow</button> :
                                 <button disabled={props.followingInProgress.some(id => id === u.id)}
                                         onClick={() => {
-                                            props.toggleIsFollowingProgress(true, u.id)
-                                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                                withCredentials: true, headers: {
-                                                    'API-KEY': '978ec9e4-88e0-4331-b5bc-a8ba69be02cb'
-                                                }
-                                            })
-                                                .then(response => {
+                                            props.followTC(u.id)
+                                            /*props.toggleIsFollowingProgress(true, u.id)
+                                                usersAPI.follow(u.id).then(response => {
                                                     if (response.data.resultCode === 0) {
                                                         props.follow(u.id)
                                                     }
                                                     props.toggleIsFollowingProgress(false, u.id)
-                                                })
+                                                })*/
                                         }}>Follow</button>}
                         </div>
                     </span>
@@ -84,9 +77,11 @@ type UsersType = {
     pageSize: number
     totalCount: number
     currentPage: number
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
+    //follow: (userId: number) => void
+    //unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
-    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
+    //toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: number[]
+    followTC:(userId:number)=>void
+    unFollowTC:(userId:number)=>void
 }

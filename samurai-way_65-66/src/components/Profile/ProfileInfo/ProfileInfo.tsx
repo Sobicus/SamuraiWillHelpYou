@@ -1,6 +1,5 @@
 import React from "react";
 import style from './ProfileInfo.module.css'
-import avatar from '../../../assets/img/avatar.jpg'
 import profileBackground from '../../../assets/img/profileBackground.png'
 import {ProfileType} from "../../../redux/store";
 export const ProfileInfo = (props:ProfileInfoType) => {
