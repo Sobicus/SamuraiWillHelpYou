@@ -5,6 +5,7 @@ import {
     DialogsPageType
 } from "../../redux/store";
 import {ChangeEvent} from 'react';
+import {Redirect} from "react-router-dom";
 
 export const Dialogs = (props: DialogsType) => {
     let state = props.dialogsPage
@@ -19,6 +20,9 @@ export const Dialogs = (props: DialogsType) => {
         let newMessageBody = e.target.value
         //props.store.dispatch(updateNewMessageBodyActionCreator(newMessageBody))
         props.updateNewMessageBodyAC(newMessageBody)
+    }
+    if (!props.isAuth) {
+        return <Redirect to={'/login'}/>
     }
     return (
         <div className={style.dialogs}>
@@ -47,4 +51,5 @@ type DialogsType = {
     updateNewMessageBodyAC: (newMessageBody: string) => void
     sendMessageAC: () => void
     dialogsPage: DialogsPageType
+    isAuth: boolean
 }
