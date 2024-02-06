@@ -2,6 +2,7 @@ import React from "react";
 import style from './ProfileInfo.module.css'
 import profileBackground from '../../../assets/img/profileBackground.png'
 import {ProfileType} from "../../../redux/store";
+import { ProfileStatus } from "./ProfileStatus";
 export const ProfileInfo = (props:ProfileInfoType) => {
     return (
             <div>
@@ -12,6 +13,7 @@ export const ProfileInfo = (props:ProfileInfoType) => {
                     <img
                         src={props.profile.photos.large}
                         alt="avatar"/>
+                    <ProfileStatus status={'status'} value={'value'}/>
                     ava + description
                     
                     <div>
