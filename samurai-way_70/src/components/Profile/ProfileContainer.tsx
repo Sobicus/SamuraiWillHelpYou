@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component<OwnPropsType> {
 type ProfileContainerType = {
     /*setUserProfile: (profile: ProfileType) => void*/
     profile: ProfileType
-    getUserProfileTC:(userId:string)=>void
+    getUserProfileTC: (userId: string) => void
     //isAuth:boolean
 }
 type PathParamsType = {
@@ -46,11 +46,11 @@ let mapStateToProps = (state: AppStateType) => ({
     //isAuth:state.auth.isAuth
 })
 
-export default withAuthRedirect(compose<React.ComponentType>(connect(mapStateToProps,
-        {
-            /*setUserProfile: setUserProfileAC*/
-            getUserProfileTC:getUserProfileTC
-        })
-    , withRouter)(ProfileContainer))
+//export default withAuthRedirect(withRouter((connect(mapStateToProps,{getUserProfileTC: getUserProfileTC}))(ProfileContainer)))
 
+export default compose<React.ComponentType>(
+    connect(mapStateToProps,{getUserProfileTC: getUserProfileTC}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
 

@@ -45,12 +45,15 @@ let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     //isAuth:state.auth.isAuth
 })
-
+/*
 export default withAuthRedirect(compose<React.ComponentType>(connect(mapStateToProps,
         {
-            /*setUserProfile: setUserProfileAC*/
             getUserProfileTC:getUserProfileTC
         })
     , withRouter)(ProfileContainer))
-
-
+*/
+export default withAuthRedirect(withRouter((connect(mapStateToProps,
+        {
+            /*setUserProfile: setUserProfileAC*/
+            getUserProfileTC:getUserProfileTC
+        }))(ProfileContainer)))
