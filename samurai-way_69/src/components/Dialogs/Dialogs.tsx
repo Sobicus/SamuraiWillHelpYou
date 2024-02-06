@@ -21,9 +21,12 @@ export const Dialogs = (props: DialogsType) => {
         //props.store.dispatch(updateNewMessageBodyActionCreator(newMessageBody))
         props.updateNewMessageBodyAC(newMessageBody)
     }
+    /*
     if (!props.isAuth) {
         return <Redirect to={'/login'}/>
     }
+    */
+
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
@@ -51,5 +54,5 @@ type DialogsType = {
     updateNewMessageBodyAC: (newMessageBody: string) => void
     sendMessageAC: () => void
     dialogsPage: DialogsPageType
-    isAuth: boolean
+    //isAuth: boolean
 }
