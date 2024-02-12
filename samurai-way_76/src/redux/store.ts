@@ -1,4 +1,4 @@
-import {SendMessageActionCreatorType, UpdateNewMessageBodyActionCreatorType} from "./dialog-reducer";
+import {SendMessageActionCreatorType} from "./dialog-reducer";
 
 /*export let store: StoreType = {
     _state: {
@@ -44,7 +44,7 @@ import {SendMessageActionCreatorType, UpdateNewMessageBodyActionCreatorType} fro
 }*/
 export type ActionsType =
     | SendMessageActionCreatorType
-    | UpdateNewMessageBodyActionCreatorType
+   /* | UpdateNewMessageBodyActionCreatorType*/
 
 
 export type StoreType = {
@@ -61,13 +61,13 @@ export type StateType = {
 export type ProfilePageType = {
     myPostsMessagesData: Array<MyPostsMessagesDataType>
     profile: ProfileType
-    newPostText: string
+    /*newPostText: string*/
     status:string
 }
 export type DialogsPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
-    newMessageBody: string
+    /*newMessageBody: string*/
 }
 export type DialogsDataType = {
     id: number

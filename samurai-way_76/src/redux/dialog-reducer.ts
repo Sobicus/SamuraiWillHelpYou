@@ -2,8 +2,6 @@ import {
     ActionsType,
     DialogsPageType,
 } from "./store";
-
-export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 export const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let initialState: DialogsPageType = {
@@ -20,39 +18,21 @@ let initialState: DialogsPageType = {
         {id: 2, message: 'How is your going?'},
         {id: 3, message: 'Good, and you?'},
     ],
-    newMessageBody: '',
 }
 
 export const dialogReducer = (state: DialogsPageType = initialState, action: ActionsType) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY: {
-            // state.newMessageBody = action.newMessageText
-            // return state
-            return {...state, newMessageBody: action.newMessageText}
-        }
         case SEND_MESSAGE: {
-            // const body = state.newMessageBody
-            // state.newMessageBody = ''
-            // state.messagesData.push({id: 4, message: body})
-            // return state
-            return {...state, messagesData: [...state.messagesData, {id: 4, message: state.newMessageBody}], newMessageBody: ''}
+            return {...state, messagesData: [...state.messagesData, {id: 4, message: action.newMessageBody}]/*, newMessageBody: ''*/}
         }
         default:
             return state
     }
 }
-export const sendMessageAC = (): SendMessageActionCreatorType => {
-    return {type: SEND_MESSAGE}
+export const sendMessageAC = (newMessageBody: string): SendMessageActionCreatorType => {
+    return {type: SEND_MESSAGE, newMessageBody}
 }
-export const updateNewMessageBodyAC = (newMessageText: string): UpdateNewMessageBodyActionCreatorType => {
-    return {type: UPDATE_NEW_MESSAGE_BODY, newMessageText}
-}
-//export type ActionsDialogsType = SendMessageActionCreatorType | UpdateNewMessageBodyActionCreatorType
-// type sendMessageActionCreatorType = ReturnType<typeof sendMessageActionCreator>
-// type updateNewMessageBodyActionCreatorType = ReturnType<typeof updateNewMessageBodyActionCreator>
 export type SendMessageActionCreatorType = {
     type: 'SEND-MESSAGE'
-}
-export type UpdateNewMessageBodyActionCreatorType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY', newMessageText: string
+    newMessageBody: string
 }

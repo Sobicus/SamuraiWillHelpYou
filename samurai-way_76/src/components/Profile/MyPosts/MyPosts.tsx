@@ -2,31 +2,20 @@ import React from "react";
 import {MyPostsMessagesDataType} from "../../../redux/store";
 import style from './MyPosts.module.css'
 import {Post} from "./Post/Post";
+import {Field, Formik} from "formik";
 
 
 export const MyPosts = (props: MyPostsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const onAddPost = () => {
-        props.addPost()
-    }
-    const onPostChange = () => {
-        let text = newPostElement.current!.value
-        props.updateNewPostText(text)
+    const addNewPost = (newPostText:string) => {
+        props.addPost(newPostText)
     }
     return (
         <div className={style.content}>
             <div>
                 <h3>My Posts</h3>
                 <div>
-                    <div>
-                        <textarea
-                            ref={newPostElement}
-                            value={props.newPostText}
-                            onChange={onPostChange}/>
-                    </div>
-                    <div>
-                        <button onClick={onAddPost}>Add post</button>
-                    </div>
+                    <AddPostForm addNewPost={addNewPost} />
                 </div>
                 <div className={style.posts}>
                     {props.myPostsMessagesData.map((myPostsMessagesData) => <Post message={myPostsMessagesData.message}
@@ -36,9 +25,49 @@ export const MyPosts = (props: MyPostsType) => {
         </div>
     )
 }
+const AddPostForm = (props: AddPostFormType) => {
+    return (
+        <div>
+            <Formik
+                initialValues={{
+                    newText: '',
+                }}
+                onSubmit={(values, {setSubmitting}) => {
+                    props.addNewPost(values.newText)
+                    //values.newText = ''
+                    setSubmitting(false)
+                }}
+            >
+                {({
+                      values,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                      isSubmitting,
+                      /* and other goodies */
+                  }) => (
+                    <form onSubmit={handleSubmit}>
+                        <Field
+                            as={'textarea'}
+                            type="newText"
+                            name="newText"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.newText}
+                        />
+                        <button type="submit" disabled={isSubmitting}>
+                            Submit
+                        </button>
+                    </form>
+                )}
+            </Formik>
+        </div>
+    );
+}
+type AddPostFormType={
+    addNewPost:(newPostText:string)=>void
+}
 type MyPostsType = {
     myPostsMessagesData: MyPostsMessagesDataType[]
-    newPostText: string
-    updateNewPostText: (text: string) => void
-    addPost: () => void
+    addPost: (newPostText:string) => void
 }

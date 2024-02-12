@@ -5,7 +5,6 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 export const ADD_POST = 'ADD-POST'
-export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const SET_STATUS = 'SET_STATUS'
 
@@ -35,7 +34,6 @@ let initialState: ProfilePageType = {
             "large": ""
         }
     },
-    newPostText: 'FILL ME',
     status: ''
 }
 
@@ -44,13 +42,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case ADD_POST: {
             const newPost = {
                 id: 3,
-                message: state.newPostText,
+                message: action.newPostText,
                 likeCount: 7,
             }
-            return {...state, myPostsMessagesData: [...state.myPostsMessagesData, newPost], newPostText: ''}
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {...state, newPostText: action.newText}
+            return {...state,myPostsMessagesData: [ newPost,...state.myPostsMessagesData]}
         }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
@@ -62,11 +57,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return state
     }
 }
-export const addPostAC = () => {
-    return {type: ADD_POST} as const
-}
-export const updateNewPostTextAC = (text: string) => {
-    return {type: UPDATE_NEW_POST_TEXT, newText: text} as const
+export const addPostAC = (newPostText:string) => {
+    return {type: ADD_POST, newPostText} as const
 }
 export const setUserProfileAC = (profile: ProfileType) => {
     return {type: SET_USER_PROFILE, profile} as const
@@ -93,11 +85,7 @@ export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
             dispatch(setStatusAC(status))
         })
 }
-//export type ActionProfileType = AddPostActionCreatorType | UpdateNewPostTextActionCreatorType
-// type addPostActionCreatorType = ReturnType<typeof addPostActionCreator>
-// type updateNewPostTextActionCreatorType = ReturnType<typeof updateNewPostTextActionCreator>
 export type AddPostAC = ReturnType<typeof addPostAC>
-export type UpdateNewPostTextACType = ReturnType<typeof updateNewPostTextAC>
 export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 export type setStatusACType = ReturnType<typeof setStatusAC>
-type ActionsType = AddPostAC | UpdateNewPostTextACType | setUserProfileACType | setStatusACType
+type ActionsType = AddPostAC | setUserProfileACType | setStatusACType
