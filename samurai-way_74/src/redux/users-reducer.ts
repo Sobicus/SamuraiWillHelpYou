@@ -78,7 +78,7 @@ export const getUsersTC = (currentPage:number,pageSize:number) => (dispatch: Dis
         .then(data => {
             dispatch(toggleIsFetchingAC(false))
             dispatch(setUsersAC(data.items))
-            dispatch(setUsersTotalCountAC(data.items.totalCount))
+            dispatch(setUsersTotalCountAC(data.totalCount))
         })
 }
 export const followTC = (userId:number) => (dispatch: Dispatch) => {

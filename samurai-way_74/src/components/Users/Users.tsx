@@ -1,17 +1,17 @@
-import {followTC, unFollowTC, UserType} from "../../redux/users-reducer";
+import {UserType} from "../../redux/users-reducer";
 import style from "./Users.module.css";
 import userPhotoTemplate from "../../assets/img/avatar.jpg";
 import React from "react";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
+
 
 export const Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalCount / props.pageSize)
     let pages = []
-    for (let i = 1; i <= pagesCount; i++) {
+        for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    console.log('page', pages)
     return (
         <div>
             <div>

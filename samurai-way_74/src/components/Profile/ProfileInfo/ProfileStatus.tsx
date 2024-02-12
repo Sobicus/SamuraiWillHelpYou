@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent} from "react";
 
 export class ProfileStatus extends React.Component<ProfileStatusType> {
     statusInputRef = React.createRef()
@@ -25,7 +25,13 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
             }
         )
     }
-
+    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<any>, snapshot?: any) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status:this.props.status
+            })
+        }
+    }
     render() {
         return (
             <div>
