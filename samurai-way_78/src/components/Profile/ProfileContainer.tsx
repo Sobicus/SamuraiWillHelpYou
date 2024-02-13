@@ -15,17 +15,11 @@ class ProfileContainer extends React.Component<OwnPropsType> {
         if (!userId) {
             userId = '24027'
         }
-        /*profileAPI.getProfileById(userId)
-            .then(data => {
-                this.props.setUserProfile(data)
-            })
-            */
         this.props.getUserProfileTC(userId)
         this.props.getStatusTC(userId)
     }
 
     render() {
-        //if(!this.props.isAuth)return <Redirect to={'/login'}/>
         return (
             <Profile profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatusTC}/>
         )
@@ -33,10 +27,8 @@ class ProfileContainer extends React.Component<OwnPropsType> {
 }
 
 type ProfileContainerType = {
-    /*setUserProfile: (profile: ProfileType) => void*/
     profile: ProfileType
     getUserProfileTC: (userId: string) => void
-    //isAuth:boolean
     status:string
     getStatusTC: (userId: string) => void
     updateStatusTC: (status: string) => void
@@ -48,10 +40,7 @@ type OwnPropsType = RouteComponentProps<PathParamsType> & ProfileContainerType
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status
-    //isAuth:state.auth.isAuth
 })
-
-// export default withAuthRedirect(withRouter((connect(mapStateToProps,{getUserProfileTC: getUserProfileTC}))(ProfileContainer)))
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {
