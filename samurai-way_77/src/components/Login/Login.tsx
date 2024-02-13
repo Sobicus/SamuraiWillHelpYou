@@ -1,13 +1,14 @@
-import {Field, Formik, useFormik} from "formik";
+import {ErrorMessage, Field, Formik} from "formik";
+import style from './Login.module.css'
 
 export const Login = () => {
     return <div>
         <h1>Login</h1>
-        <Basic/>
+        <LoginForm/>
     </div>
 }
-const Basic = () => (
-    <div>
+const LoginForm = () => {
+    return <div>
         <Formik
             initialValues={{
                 email: '',
@@ -28,11 +29,13 @@ const Basic = () => (
                 } else if (values.password.length < 4) {
                     errors.password = 'Must be 4 characters or more';
                 }
-                return errors;
+                return errors ;
             }}
-            onSubmit={(values, {setSubmitting}) => {
+            onSubmit={async (values, {setSubmitting, setFieldValue}) => {
                 setTimeout(() => {
                     alert(JSON.stringify(values, null, 2));
+                    setFieldValue('email','')
+                    setFieldValue('password','')
                     setSubmitting(false);
                 }, 400);
             }}
@@ -45,25 +48,29 @@ const Basic = () => (
                   handleBlur,
                   handleSubmit,
                   isSubmitting,
+
                   /* and other goodies */
               }) => (
                 <form onSubmit={handleSubmit}>
-                    <input
+                    <Field
                         type="email"
                         name="email"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.email}
                     />
-                    {errors.email && touched.email && errors.email}
-                    <input
+                    {/*{errors.email && touched.email && errors.email}*/}
+                    {errors.email && <div className={style.errors}>{errors.email}</div>} {/*for example how to can styled errors*/}
+                    <ErrorMessage name="email" component="div" />
+                    <Field
                         type="password"
                         name="password"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         value={values.password}
                     />
-                    {errors.password && touched.password && errors.password}
+                    {/*{errors.password && touched.password && errors.password}*/}
+                    <ErrorMessage name="password" component="div" />
                     <Field
                         type="checkbox"
                         name="rememberMe"
@@ -77,10 +84,9 @@ const Basic = () => (
             )}
         </Formik>
     </div>
-);
+}
 
 type loginErrorType = {
     email?: string
     password?: string
-    rememberMe?: boolean
 }
