@@ -5,13 +5,15 @@ import {usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
 import thunk, { ThunkDispatch } from "redux-thunk";
 import { useDispatch } from "react-redux";
+import {appReducer} from "./app-reducer";
 
 let reducers = combineReducers(
     {
         profilePage: profileReducer,
         dialogsPage: dialogReducer,
         usersPage:usersReducer,
-        auth: authReducer
+        auth: authReducer,
+        app:appReducer
     }
 )
 

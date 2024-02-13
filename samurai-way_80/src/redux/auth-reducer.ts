@@ -25,7 +25,7 @@ export const setAuthUserDataAC = (id: number, login: string, email: string, isAu
     return {type: SET_USER_DATA, payload: {id, login, email, isAuth}} as const
 }
 export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
-    authAPI.authMe()
+   return  authAPI.authMe()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data
@@ -34,7 +34,7 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
         })
 }
 export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: AppDispatch) => {
-    await authAPI.login(email, password, rememberMe)
+   return  await authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserDataTC())
@@ -42,7 +42,7 @@ export const loginTC = (email: string, password: string, rememberMe: boolean) =>
         })
 }
 export const logoutTC = () => async (dispatch: AppDispatch) => {
-    await authAPI.logout()
+   return  await authAPI.logout()
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setAuthUserDataAC(0, '', '', false))

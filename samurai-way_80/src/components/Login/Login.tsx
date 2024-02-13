@@ -7,6 +7,7 @@ import {AppStateType} from "../../redux/redux-store";
 
 
 const LoginForm = (props: LoginFormType) => {
+
     return <div>
         <Formik
             initialValues={{
@@ -14,7 +15,7 @@ const LoginForm = (props: LoginFormType) => {
                 password: '',
                 rememberMe: false
             }}
-            validate={values => {
+           validate={values => {
                 const errors: loginErrorType = {};
                 if (!values.email) {
                     errors.email = 'Required';
