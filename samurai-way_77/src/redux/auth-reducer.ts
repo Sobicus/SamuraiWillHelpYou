@@ -32,6 +32,7 @@ export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
             }
         })
 }
+
 type ActionType = setUserDataACType
 
 type setUserDataACType = ReturnType<typeof setAuthUserDataAC>
