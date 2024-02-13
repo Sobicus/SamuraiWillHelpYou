@@ -1,6 +1,5 @@
-import {Dispatch} from "redux";
+import { Dispatch } from "redux";
 import {authAPI} from "../api/api";
-import {ThunkAction} from "redux-thunk";
 import {AppDispatch} from "./redux-store";
 
 const SET_USER_DATA = 'SET_USER_DATA'
