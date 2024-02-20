@@ -5,9 +5,8 @@ import {Post} from "./Post/Post";
 import {Field, Formik} from "formik";
 
 
-export const MyPosts = (props: MyPostsType) => {
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const addNewPost = (newPostText:string) => {
+export const MyPosts = React.memo((props: MyPostsType) => {
+    const addNewPost = (newPostText: string) => {
         props.addPost(newPostText)
     }
     return (
@@ -15,16 +14,47 @@ export const MyPosts = (props: MyPostsType) => {
             <div>
                 <h3>My Posts</h3>
                 <div>
-                    <AddPostForm addNewPost={addNewPost} />
+                    <AddPostForm addNewPost={addNewPost}/>
                 </div>
                 <div className={style.posts}>
-                    {props.myPostsMessagesData.map((myPostsMessagesData) => <Post message={myPostsMessagesData.message}
-                                                                                  likeCount={myPostsMessagesData.likeCount}/>)}
+                    {props.myPostsMessagesData.map((myPostsMessagesData) => <Post
+                        message={myPostsMessagesData.message}
+                        likeCount={myPostsMessagesData.likeCount}/>)}
                 </div>
             </div>
         </div>
     )
-}
+})
+
+//------------------------class component------------
+// export class MyPosts extends React.PureComponent<MyPostsType> {
+//     /*
+//     shouldComponentUpdate(nextProps: Readonly<MyPostsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+//         return nextProps !== this.props || nextState !== this.state
+//     }
+//     */
+//     render() {
+//         const addNewPost = (newPostText: string) => {
+//             this.props.addPost(newPostText)
+//         }
+//         return (
+//             <div className={style.content}>
+//                 <div>
+//                     <h3>My Posts</h3>
+//                     <div>
+//                         <AddPostForm addNewPost={addNewPost}/>
+//                     </div>
+//                     <div className={style.posts}>
+//                         {this.props.myPostsMessagesData.map((myPostsMessagesData) => <Post
+//                             message={myPostsMessagesData.message}
+//                             likeCount={myPostsMessagesData.likeCount}/>)}
+//                     </div>
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
+//---------------------------------------------------
 const AddPostForm = (props: AddPostFormType) => {
     return (
         <div>
@@ -64,10 +94,10 @@ const AddPostForm = (props: AddPostFormType) => {
         </div>
     );
 }
-type AddPostFormType={
-    addNewPost:(newPostText:string)=>void
+type AddPostFormType = {
+    addNewPost: (newPostText: string) => void
 }
 type MyPostsType = {
     myPostsMessagesData: MyPostsMessagesDataType[]
-    addPost: (newPostText:string) => void
+    addPost: (newPostText: string) => void
 }
