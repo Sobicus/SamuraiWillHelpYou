@@ -3,6 +3,7 @@ import style from './ProfileInfo.module.css'
 import profileBackground from '../../../assets/img/profileBackground.png'
 import {ProfileType} from "../../../redux/store";
 import { ProfileStatus } from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 export const ProfileInfo = (props:ProfileInfoType) => {
     return (
             <div>
@@ -14,6 +15,7 @@ export const ProfileInfo = (props:ProfileInfoType) => {
                         src={props.profile.photos.large}
                         alt="avatar"/>
                     <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                     ava + description
                     
                     <div>
