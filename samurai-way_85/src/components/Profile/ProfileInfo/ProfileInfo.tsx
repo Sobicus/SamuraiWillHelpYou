@@ -14,7 +14,7 @@ export const ProfileInfo = (props:ProfileInfoType) => {
                     <img
                         src={props.profile.photos.large}
                         alt="avatar"/>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                    {/*<ProfileStatus status={props.status} updateStatus={props.updateStatus}/>*/}
                     <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
                     ava + description
                     
