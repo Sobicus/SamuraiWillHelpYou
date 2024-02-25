@@ -63,18 +63,6 @@ type UsersContainerType = {
     followTC: (userId: number) => void
     unFollowTC: (userId: number) => void
 }
-/*
-let mapStateToProps = (state: AppStateType) => {
-    return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
-    }
-}
-*/
 let mapStateToProps = (state: AppStateType) => {
     return {
         users: getUsers(state),
