@@ -5,6 +5,7 @@ import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
 export const ADD_POST = 'ADD-POST'
+export const DELETE_POST = 'DELETE-POST'
 export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 export const SET_STATUS = 'SET_STATUS'
 
@@ -53,12 +54,18 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+        case DELETE_POST: {
+            return {...state, myPostsMessagesData: state.myPostsMessagesData.filter(p=>p.id!==action.postId)}
+        }
         default:
             return state
     }
 }
 export const addPostAC = (newPostText:string) => {
     return {type: ADD_POST, newPostText} as const
+}
+export const deletePostAC = (postId:number) => {
+    return {type: DELETE_POST, postId} as const
 }
 export const setUserProfileAC = (profile: ProfileType) => {
     return {type: SET_USER_PROFILE, profile} as const
@@ -88,4 +95,5 @@ export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
 export type AddPostAC = ReturnType<typeof addPostAC>
 export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 export type setStatusACType = ReturnType<typeof setStatusAC>
-type ActionsType = AddPostAC | setUserProfileACType | setStatusACType
+export type deletePostACType = ReturnType<typeof deletePostAC>
+type ActionsType = AddPostAC | setUserProfileACType | setStatusACType |deletePostACType
