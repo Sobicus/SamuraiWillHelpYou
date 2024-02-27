@@ -1,0 +1,10 @@
+.backgroundImg img {
+    width: 100%;
+}
+.profileDescription{
+    padding: 10px;
+}
+.profileDescription img{
+    width: 80px;
+    border-radius: 50px;
+}
