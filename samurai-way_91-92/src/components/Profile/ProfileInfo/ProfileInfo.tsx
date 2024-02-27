@@ -2,7 +2,6 @@ import React from "react";
 import style from './ProfileInfo.module.css'
 import profileBackground from '../../../assets/img/profileBackground.png'
 import {ProfileType} from "../../../redux/store";
-import { ProfileStatus } from "./ProfileStatus";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 export const ProfileInfo = (props:ProfileInfoType) => {
     return (
