@@ -1,9 +1,8 @@
 import {AppStateType} from "../../redux/redux-store";
 import {
-    followAC, followTC, getUsersTC,
+    followTC, getUsersTC,
     setCurrentPageAC,
-    toggleIsFollowingProgressAC,
-    unfollowAC, unFollowTC,
+    unFollowTC,
     UserType
 } from "../../redux/users-reducer";
 import {connect} from "react-redux";
@@ -20,11 +19,13 @@ import {
 
 class UsersContainer extends React.Component<UsersContainerType> {
     componentDidMount() {
-        this.props.getUsersTC(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsersTC(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsersTC(pageNumber, this.props.pageSize)
+        const {pageSize} = this.props
+        this.props.getUsersTC(pageNumber, pageSize)
     }
 
     render() {
