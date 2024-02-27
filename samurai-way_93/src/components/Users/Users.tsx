@@ -1,8 +1,5 @@
 import {UserType} from "../../redux/users-reducer";
-import style from "./Users.module.css";
-import userPhotoTemplate from "../../assets/img/avatar.jpg";
 import React from "react";
-import {NavLink} from "react-router-dom";
 import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User";
 
