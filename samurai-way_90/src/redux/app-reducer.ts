@@ -1,7 +1,7 @@
 import {AppDispatch} from "./redux-store";
 import {getAuthUserDataTC} from "./auth-reducer";
 
-const SET_INITIALIZED = 'SET-INITIALIZED'
+const SET_INITIALIZED = '/app/SET-INITIALIZED'
 
 let initialAppState: initialStateType = {
     initialized: false

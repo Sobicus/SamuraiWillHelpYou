@@ -4,10 +4,10 @@ import {
 import {Dispatch} from "redux";
 import {profileAPI} from "../api/api";
 
-export const ADD_POST = 'ADD-POST'
-export const DELETE_POST = 'DELETE-POST'
-export const SET_USER_PROFILE = 'SET_USER_PROFILE'
-export const SET_STATUS = 'SET_STATUS'
+export const ADD_POST = '/profile/ADD-POST'
+export const DELETE_POST = '/profile/DELETE-POST'
+export const SET_USER_PROFILE = '/profile/SET_USER_PROFILE'
+export const SET_STATUS = '/profile/SET_STATUS'
 
 let initialState: ProfilePageType = {
     myPostsMessagesData: [
@@ -46,7 +46,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 message: action.newPostText,
                 likeCount: 7,
             }
-            return {...state,myPostsMessagesData: [ newPost,...state.myPostsMessagesData]}
+            return {...state, myPostsMessagesData: [newPost, ...state.myPostsMessagesData]}
         }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
@@ -55,16 +55,16 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
             return {...state, status: action.status}
         }
         case DELETE_POST: {
-            return {...state, myPostsMessagesData: state.myPostsMessagesData.filter(p=>p.id!==action.postId)}
+            return {...state, myPostsMessagesData: state.myPostsMessagesData.filter(p => p.id !== action.postId)}
         }
         default:
             return state
     }
 }
-export const addPostAC = (newPostText:string) => {
+export const addPostAC = (newPostText: string) => {
     return {type: ADD_POST, newPostText} as const
 }
-export const deletePostAC = (postId:number) => {
+export const deletePostAC = (postId: number) => {
     return {type: DELETE_POST, postId} as const
 }
 export const setUserProfileAC = (profile: ProfileType) => {
@@ -73,27 +73,22 @@ export const setUserProfileAC = (profile: ProfileType) => {
 export const setStatusAC = (status: string) => {
     return {type: SET_STATUS, status} as const
 }
-export const getUserProfileTC = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getProfileById(userId)
-        .then(data => {
-            dispatch(setUserProfileAC(data))
-        })
+export const getUserProfileTC = (userId: string) => async (dispatch: Dispatch) => {
+    const data = await profileAPI.getProfileById(userId)
+    dispatch(setUserProfileAC(data))
 }
-export const getStatusTC = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setStatusAC(response.data))
-        })
+export const getStatusTC = (userId: string) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.getStatus(userId)
+    dispatch(setStatusAC(response.data))
+
 }
-export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if(response.data.resultCode===0)
-            dispatch(setStatusAC(status))
-        })
+export const updateStatusTC = (status: string) => async (dispatch: Dispatch) => {
+    const response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0)
+        dispatch(setStatusAC(status))
 }
 export type AddPostAC = ReturnType<typeof addPostAC>
 export type setUserProfileACType = ReturnType<typeof setUserProfileAC>
 export type setStatusACType = ReturnType<typeof setStatusAC>
 export type deletePostACType = ReturnType<typeof deletePostAC>
-type ActionsType = AddPostAC | setUserProfileACType | setStatusACType |deletePostACType
+type ActionsType = AddPostAC | setUserProfileACType | setStatusACType | deletePostACType

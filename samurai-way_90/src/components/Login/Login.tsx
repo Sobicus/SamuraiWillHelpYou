@@ -15,7 +15,7 @@ const LoginForm = (props: LoginFormType) => {
                 password: '',
                 rememberMe: false
             }}
-           validate={values => {
+            validate={values => {
                 const errors: loginErrorType = {};
                 if (!values.email) {
                     errors.email = 'Required';
@@ -100,7 +100,7 @@ type loginErrorType = {
 }
 type LoginType = {
     loginTC: (email: string, password: string, rememberMe: boolean) => void
-    isAuth:boolean
+    isAuth: boolean
 }
 type LoginFormType = {
     loginTC: (email: string, password: string, rememberMe: boolean) => void

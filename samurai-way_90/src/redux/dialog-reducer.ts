@@ -2,7 +2,7 @@ import {
     ActionsType,
     DialogsPageType,
 } from "./store";
-export const SEND_MESSAGE = 'SEND-MESSAGE'
+export const SEND_MESSAGE = '/dialog/SEND-MESSAGE'
 
 let initialState: DialogsPageType = {
     dialogsData: [
@@ -33,6 +33,6 @@ export const sendMessageAC = (newMessageBody: string): SendMessageActionCreatorT
     return {type: SEND_MESSAGE, newMessageBody}
 }
 export type SendMessageActionCreatorType = {
-    type: 'SEND-MESSAGE'
+    type: '/dialog/SEND-MESSAGE'
     newMessageBody: string
 }

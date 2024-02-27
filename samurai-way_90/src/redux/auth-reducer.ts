@@ -1,8 +1,8 @@
-import { Dispatch } from "redux";
+import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {AppDispatch} from "./redux-store";
 
-const SET_USER_DATA = 'SET_USER_DATA'
+const SET_USER_DATA = '/auth/SET_USER_DATA'
 
 let initialState: authStateType = {
     id: 0,
@@ -24,30 +24,24 @@ export const authReducer = (state: authStateType = initialState, action: ActionT
 export const setAuthUserDataAC = (id: number, login: string, email: string, isAuth: boolean) => {
     return {type: SET_USER_DATA, payload: {id, login, email, isAuth}} as const
 }
-export const getAuthUserDataTC = () => (dispatch: Dispatch) => {
-   return  authAPI.authMe()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let {id, login, email} = response.data.data
-                dispatch(setAuthUserDataAC(id, login, email, true))
-            }
-        })
+export const getAuthUserDataTC = () => async (dispatch: Dispatch) => {
+    const response = await authAPI.authMe()
+    if (response.data.resultCode === 0) {
+        let {id, login, email} = response.data.data
+        dispatch(setAuthUserDataAC(id, login, email, true))
+    }
 }
 export const loginTC = (email: string, password: string, rememberMe: boolean) => async (dispatch: AppDispatch) => {
-   return  await authAPI.login(email, password, rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthUserDataTC())
-            }
-        })
+    const response = await authAPI.login(email, password, rememberMe)
+    if (response.data.resultCode === 0) {
+        await dispatch(getAuthUserDataTC())
+    }
 }
 export const logoutTC = () => async (dispatch: AppDispatch) => {
-   return  await authAPI.logout()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserDataAC(0, '', '', false))
-            }
-        })
+    const response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserDataAC(0, '', '', false))
+    }
 }
 
 type ActionType = setUserDataACType

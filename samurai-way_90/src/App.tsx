@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import './App.css';
 import {Navbar} from "./components/Navbar/Navbar";
 import {Route, withRouter} from "react-router-dom";
@@ -11,7 +11,6 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from './components/Login/Login';
 import {connect} from "react-redux";
-import {getAuthUserDataTC} from "./redux/auth-reducer";
 import {compose} from 'redux';
 import {initializedAppTC} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
